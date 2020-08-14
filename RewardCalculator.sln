@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveRewards", "LiveRewards\LiveRewards.csproj", "{04ECBFD6-49BE-4BE4-9830-E3204F01D981}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RewardCalculator", "StaticCalculator\RewardCalculator.csproj", "{9671BC16-EB5D-4044-B1DD-822C482313DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04ECBFD6-49BE-4BE4-9830-E3204F01D981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04ECBFD6-49BE-4BE4-9830-E3204F01D981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04ECBFD6-49BE-4BE4-9830-E3204F01D981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04ECBFD6-49BE-4BE4-9830-E3204F01D981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9671BC16-EB5D-4044-B1DD-822C482313DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9671BC16-EB5D-4044-B1DD-822C482313DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9671BC16-EB5D-4044-B1DD-822C482313DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9671BC16-EB5D-4044-B1DD-822C482313DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF2C77E7-AD23-4ECF-A46A-9F881A211299}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="resource\daily.png" />
+    <None Remove="resource\general.png" />
+    <None Remove="resource\icon.png" />
+    <None Remove="resource\quests.png" />
+    <None Remove="resource\reserve.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resource\daily.png" />
+    <Resource Include="resource\icon.png" />
+    <Resource Include="resource\quests.png" />
+    <Resource Include="resource\reserve.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StaticCalculator\RewardCalculator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resource\general.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
