@@ -18,7 +18,7 @@ namespace LiveRewards
     public partial class MainWindow : Window
     {
         public SeriesCollection SeriesCollection { get; set; } = new SeriesCollection();
-        public Configuration Configuration       { get; set; }
+        public Configuration Configuration       { get; set; } 
 
         public MainWindow()
         {
@@ -42,12 +42,11 @@ namespace LiveRewards
                     .ForEach(value => chartValues.Add(value.Bfp));
             else 
                 collections.Item1
-                    .Where((value, index) => index % 5 == 0)
+                    //.Where((value, index) => index % 5 == 0)
                     .ToList()
                     .ForEach(value => chartValues.Add(value.Bfp));
 
-            SeriesCollection.Add(new LineSeries
-            {
+            SeriesCollection.Add(new LineSeries {
                 Title = "Test",
                 Values = chartValues
             });

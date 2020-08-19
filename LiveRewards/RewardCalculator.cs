@@ -16,23 +16,21 @@ namespace RewardCalculator
             var dailyCollection = new ValueCollection {
                 MeasuredValue.Empty(configuration)
             };
-
-            var dailyPool = 0;
-            var questPool = 0;
-            var reservePool = configuration.ReservePoolSize;
+            
             var reserveTimer = 1;
-            var questTimer = 1;
-            var dayCount = configuration.GeneralAllXDays;
+            var reservePool  = configuration.ReservePoolSize;
+            var questTimer   = 1;
+            var dailyPool    = 0;
+            var questPool    = 0;
+            var dayCount     = configuration.GeneralAllXDays;
 
             for (int day = 1; day <= configuration.GeneralTotalDays; day++) {
                 dailyPool += dailyPool == 0
                     ? configuration.DailyMaxGain
                     : configuration.DailyMinGain;
 
-                if (questPool < configuration.QuestsPoolSize) {
-                    questPool += configuration.QuestsDailyGain;
-                    questPool = Math.Min(questPool, configuration.QuestsPoolSize);
-                }
+                if (questPool < configuration.QuestsPoolSize) 
+                    questPool = Math.Min(questPool + configuration.QuestsDailyGain, configuration.QuestsPoolSize);
 
                 if (dayCount == configuration.GeneralAllXDays) {
                     dayCount = 1;
@@ -43,35 +41,33 @@ namespace RewardCalculator
 
                         var newValue = new MeasuredValue
                         {
-                            Minute = minute + ((day - 1) * 1440),
-                            QuestsLeft = oldValue.QuestsLeft,
                             ReservePool = oldValue.ReservePool,
-                            DailyPool = dailyPool,
-                            Bfp = oldValue.Bfp,
-                            Day = day
+                            QuestsLeft  = oldValue.QuestsLeft,
+                            DailyPool   = dailyPool,
+                            Minute      = minute + ((day - 1) * 1440),
+                            Bfp         = oldValue.Bfp,
+                            Day         = day
                         };
 
                         if (minute < configuration.GeneralMinutesPerDay + 1)
                         {
-                            //if(minute%2 == 0)
-                            //    newValue.Bfp += 1;  // 1 Bfp pro 2 Minuten Spielzeit
                             if (dailyPool > 0)
                             {
                                 var gainFromDaily = dailyPool / (configuration.DailyDuration - minute + 1);
-                                dailyPool -= gainFromDaily;
-                                newValue.Bfp += gainFromDaily;
+                                newValue.Bfp      += gainFromDaily;
+                                dailyPool         -= gainFromDaily;
                             }
                             else
                             {
                                 if (reservePool >= configuration.ReserveDrainPerMinute)
                                 {
                                     newValue.Bfp += configuration.ReserveDrainPerMinute;
-                                    reservePool -= configuration.ReserveDrainPerMinute;
+                                    reservePool  -= configuration.ReserveDrainPerMinute;
                                 }
                                 else if (reservePool > 0)
                                 {
                                     newValue.Bfp += reservePool;
-                                    reservePool = 0;
+                                    reservePool  = 0;
                                 }
                             }
                         }
