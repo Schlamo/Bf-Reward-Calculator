@@ -17,21 +17,17 @@ namespace LiveRewards
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static int Minutes                { get; } = 1440;
-        public static string CsvAllPath          { get; } = "all.csv";
-        public static string CsvDailyPath        { get; } = "daily.csv";
-        public static string OutputDirectory     { get; } = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "CSV");
         public SeriesCollection SeriesCollection { get; set; } = new SeriesCollection();
         public Configuration Configuration       { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            if (!Directory.Exists(OutputDirectory))
-                Directory.CreateDirectory(OutputDirectory);
+            if (!Directory.Exists(Constants.OutputDirectory))
+                Directory.CreateDirectory(Constants.OutputDirectory);
 
             Configuration = Configuration.FromIniData(new IniFileParser.IniFileParser()
-                .ReadFile(Constants.IniPath));
+                .ReadFile(Constants.IniFile));
 
             DataContext = this;
         }
@@ -63,14 +59,14 @@ namespace LiveRewards
 
         private void WriteToFile((ValueCollection, ValueCollection) collections)
         {
-            if (!Directory.Exists(OutputDirectory))
-                Directory.CreateDirectory(OutputDirectory);
+            if (!Directory.Exists(Constants.OutputDirectory))
+                Directory.CreateDirectory(Constants.OutputDirectory);
 
-            using var writer = new StreamWriter(Path.Combine(OutputDirectory, CsvAllPath));
+            using var writer = new StreamWriter(Path.Combine(Constants.OutputDirectory, Constants.CsvAllPath));
             using var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
             csvWriter.WriteRecords(collections.Item1);
 
-            using var dailyWriter = new StreamWriter(Path.Combine(OutputDirectory, CsvDailyPath));
+            using var dailyWriter = new StreamWriter(Path.Combine(Constants.OutputDirectory, Constants.CsvDailyPath));
             using var dailycsvWriter = new CsvWriter(dailyWriter, CultureInfo.InvariantCulture);
             dailycsvWriter.WriteRecords(collections.Item2);
         }
